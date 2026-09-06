@@ -2,7 +2,7 @@ use std::{fs::File, io::Cursor, path::PathBuf};
 
 use anyhow::Result;
 use clap::Parser;
-use mh_backport::{amo::{AmoNode, AmoView, enumerate_amo, export_to_gltf}, amo_ahi_expand, apx::{self}, get_link_file_slice, load_texlist, meltw, read_afs_file, read_all_links};
+use mh1tool::{amo::{AmoNode, AmoView, enumerate_amo, export_to_gltf}, amo_ahi_expand, apx::{self}, get_link_file_slice, load_texlist, meltw, read_afs_file, read_all_links};
 
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
