@@ -588,7 +588,14 @@ pub struct AmoView<'a> {
 }
 
 impl<'a> AmoView<'a> {
-
+    pub fn get_texture_paths(&self, base_file_name: &str) -> Vec<String> {
+        let mut paths = vec![];
+        for tex in self.textures.iter() {
+            let texture_filename = format!("{}_tex.{}.0.png", base_file_name, tex.id);
+            paths.push(texture_filename);
+        }
+        paths
+    }
 }
 
 impl<'a> TryFrom<AmoNode<'a>> for AmoView<'a> {
@@ -950,10 +957,11 @@ pub fn export_to_gltf(view: &AmoView, output_name: &str) -> Result<()> {
         gltf_materials.push(json::Material {
             name: Some(format!("AmoMaterial_{}", i)),
             alpha_mode,
-            alpha_cutoff: if has_texture { Some(json::material::AlphaCutoff(0.1)) } else { None },
+            alpha_cutoff: None,
             double_sided: has_texture,
             pbr_metallic_roughness: pbr,
-            emissive_factor: json::material::EmissiveFactor(emissive_factor),
+            //emissive_factor: json::material::EmissiveFactor(emissive_factor),
+            emissive_factor: Default::default(),
             extensions: Default::default(),
             extras: Default::default(),
             ..Default::default()
